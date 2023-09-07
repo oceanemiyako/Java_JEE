@@ -16,7 +16,18 @@
 <body>
 
 <main class="container">
-    <form action="form" method="post">
+    <div class="row my-3">
+        <div class="col-4 offset-2 text-bg-dark rounded p-3">
+            <h1 class="fw-light">- Ajout Animaux -</h1>
+            <hr>
+            <table class="table table-dark text-center align-middle">
+                <thead>
+                </thead>
+            <tbody>
+
+            <tr>
+                <td>
+                <form action="form" method="post">
         <div>
             <label for="firstname">Firstname: </label>
             <input type="text" name="firstname" id="firstname">
@@ -37,6 +48,12 @@
         <p>Paramètre Yugi = Leetchi !</p>
         <% } %>
     </form>
+                </td>
+            </tr>
+            </tbody>
+            </table>
+        </div>
+    </div>
 </main>
 
 
