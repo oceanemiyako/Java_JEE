@@ -14,9 +14,9 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 
-@WebServlet(name = "signUpServlet", value = "/auth/signUp")
-public class SignUpServlet extends HttpServlet {
+@WebServlet(name = "signInServlet", value = "/auth/signIn")
 
+public class SignInServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -25,7 +25,8 @@ public class SignUpServlet extends HttpServlet {
 
         req.setAttribute("utilisateur", dto);
         req.setAttribute("errors", errors);
-        req.setAttribute("mode", "signUp");
+        req.setAttribute("mode", "signIn");
+
 
         req.getRequestDispatcher("/WEB-INF/auth/signForm.jsp").forward(req, resp);
     }
@@ -35,26 +36,24 @@ public class SignUpServlet extends HttpServlet {
         ArrayList<String> errors = new ArrayList<>();
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        String name = req.getParameter("name");
 
         Optional<Utilisateur> foundUser = FakeData.utilisateurs.stream().filter(u -> u.getEmail().equals(email) && u.getPassword().equals(password)).findFirst();
 
-        if (!foundUser.isPresent()) {
-            Utilisateur newUtilisateur = new Utilisateur("name", "email", 0L," ");
-            FakeData.utilisateurs.add(newUtilisateur);
-            req.getSession().setAttribute("user", newUtilisateur);
+        if (foundUser.isPresent()) {
+            req.getSession().setAttribute("user", foundUser.get());
             resp.sendRedirect(req.getContextPath() + "/private/profile");
         } else {
-            errors.add("User already exists!");
+            errors.add("Invalid credentials!");
             UtilisateurDTO dto = new UtilisateurDTO();
             dto.setEmail(email);
             dto.setPassword(password);
-            req.setAttribute("utilisateur", dto);
+            req.setAttribute("user", dto);
             req.setAttribute("errors", errors);
-            req.setAttribute("mode", "signUp");
+            req.setAttribute("mode", "signIn");
             req.getRequestDispatcher("/WEB-INF/auth/signForm.jsp").forward(req, resp);
         }
     }
+
 
 
 
