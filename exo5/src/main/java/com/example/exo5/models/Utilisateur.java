@@ -13,16 +13,28 @@ public class Utilisateur {
 
     private String name;
     private String email;
+ private String password;
+    public Long getId() {
+        return id;
+    }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public Utilisateur() {
         this.id = ++count;
     }
 
-    public Utilisateur(String name, String email, Long id) {
+    public Utilisateur(String name, String email, Long id, String password) {
         this.name = name;
         this.email = email;
         this.id =  ++count;
+        this.password = password;
     }
 
     public String getName() {
@@ -46,6 +58,7 @@ public class Utilisateur {
         return "Utilisateur{" +
                 "name='" + name + '\'' +
                 ", email='" + email + '\'' +
+                ", password= " + password + '\'' +
                 '}';
     }
 }

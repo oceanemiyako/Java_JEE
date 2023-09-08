@@ -16,10 +16,11 @@ public class UtilisateurAddServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Utilisateur utilisateur = new Utilisateur("", " ", 0L);
+        Utilisateur utilisateur = new Utilisateur("", " ", 0L, " ");
 
         req.setAttribute("name", utilisateur);
         req.setAttribute("email", utilisateur);
+        req.setAttribute("password", utilisateur);
         req.setAttribute("mode", "add");
 
         req.getRequestDispatcher("/WEB-INF/UtilisateurForm.jsp").forward(req, resp);
@@ -30,11 +31,13 @@ public class UtilisateurAddServlet extends HttpServlet {
         String name = req.getParameter("name");
         String email = req.getParameter("email");
         Long id = req.getContentLengthLong();
+        String password =req.getParameter("password");
 
         Utilisateur newUtilisateur = new Utilisateur(
                 name,
                 email,
-                0L
+                0L,
+                password
         );
 
         FakeData.utilisateurs.add(newUtilisateur);
