@@ -1,11 +1,12 @@
-<%@ page import="com.example.exo5.models.Utilisateur" %><%--
+<%@ page import="com.example.exo5.models.Utilisateur" %>
+<%@ page import="com.example.exo5.models.UtilisateurDTO" %><%--
   Created by IntelliJ IDEA.
   User: Administrateur
   Date: 08/09/2023
   Time: 14:00
   To change this template use File | Settings | File Templates.
 --%>
-<jsp:useBean id="utilisateurs" type="java.util.ArrayList<com.example.exo5.models.Utilisateur>" scope="request" />
+<jsp:useBean id="utilisateurs" type="java.util.ArrayList<com.example.exo5.models.UtilisateurDTO>" scope="request" />
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -21,10 +22,11 @@
                 <th>#</th>
                 <th>Name</th>
                 <th>email</th>
+                <th>password</th>
             </tr>
             </thead>
             <tbody>
-            <% for (Utilisateur d : utilisateurs) { %>
+            <% for (UtilisateurDTO d : utilisateurs) { %>
             <tr>
                 <td><%= d.getId() %></td>
                 <td><%= d.getName() %></td>
